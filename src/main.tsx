@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ListPage from './outer/react/ListPage.tsx';
+import { Provider } from './outer/react/Provider.ts';
 import { Controller, UseCases } from './adapters/Controller/Controller.ts';
 import {
   AddItemToList,
@@ -51,9 +52,14 @@ export class Main extends React.PureComponent<Props, State> {
   }
 
   render(): React.ReactElement {
+    const { listContext } = this.state;
     return (
       <>
-        <div>Test</div>
+        <Provider
+          value={{ controller: this._controller, viewModel: listContext }}
+        >
+          <ListPage />
+        </Provider>
       </>
     );
   }
