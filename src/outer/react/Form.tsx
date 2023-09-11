@@ -11,7 +11,6 @@ const Form = () => {
     if (!itemName) return;
     context?.controller?.executeAddItemToList(itemName);
     setItemName('');
-    console.log(context?.viewModel?.list);
   };
 
   return (

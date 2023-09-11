@@ -1,19 +1,21 @@
 import Header from './Header.tsx';
 import styled from 'styled-components';
 import TaskItem from './TaskItem.tsx';
-import { useContext } from 'react';
-import { Context } from './Provider.ts';
+import { ViewModel } from '../../adapters/Presenter/ViewModel.ts';
 
-const ListPage = () => {
-  const context = useContext(Context);
+type Props = {
+  viewModel: ViewModel;
+};
 
+const ListPage = ({ viewModel }: Props) => {
+  const list = viewModel?.list;
   return (
     <PageWrapper>
       <Header />
-      {context?.viewModel?.list ? (
+      {list ? (
         <List>
           <h2>To Do:</h2>
-          {context.viewModel.list.map((item) => (
+          {list.map((item) => (
             <TaskItem key={item.id} item={item} />
           ))}
         </List>
