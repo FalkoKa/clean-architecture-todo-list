@@ -1,16 +1,16 @@
-import {Item} from "../../domains/Item.ts";
+import { PresentableList } from '../../application/AddItemToList.ts';
 
 export const createInitialViewModel = () => {
-    return {
-        global: {
-            isLoading: true
-        }
-    }
-}
+  return {
+    global: {
+      isLoading: true,
+    },
+  };
+};
 
 export type ViewModel = {
-    global: {
-        isLoading: boolean
-    }
-    list?: Array<Item>
-}
+  global: {
+    isLoading: boolean;
+  };
+  list?: PresentableList;
+};
