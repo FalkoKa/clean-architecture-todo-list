@@ -2,8 +2,10 @@ import { LuEdit } from 'react-icons/lu';
 import { MdDelete } from 'react-icons/md';
 import { BiSolidSave } from 'react-icons/bi';
 import styled from 'styled-components';
-import { useState } from 'react'; // useEffect, useRef
+import { useContext, useState } from 'react'; // useEffect, useRef
 import { Item } from '../../domains/Item.ts';
+import { Context } from './Provider.ts';
+import { ContextType } from './Provider.ts';
 
 // const useOutsideClick = (callback) => {
 //     const ref = useRef();
@@ -28,9 +30,15 @@ type Props = {
 };
 const TaskItem = ({ item }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
+  const context: ContextType | null = useContext(Context);
 
   const handleDoubleClick = () => {
     setEdit(true);
+  };
+
+  const handleDelete = (id: string | undefined): void => {
+    if (!id) return;
+    context?.controller?.executeRemoveItemFromList(id);
   };
 
   // const handleClickOutside = () => {
@@ -57,7 +65,7 @@ const TaskItem = ({ item }: Props) => {
         ) : (
           <LuEdit onClick={() => setEdit((prev) => !prev)} />
         )}
-        <MdDelete onClick={() => console.log('delete')} size={20} />
+        <MdDelete onClick={() => handleDelete(item?.id)} size={20} />
       </IconWrapper>
     </ItemWrapper>
   );
@@ -67,7 +75,6 @@ const EditInput = styled.input`
   width: 100%;
   margin: 0;
   padding: 0;
-  //border: none;
 `;
 
 const IconWrapper = styled.div`
