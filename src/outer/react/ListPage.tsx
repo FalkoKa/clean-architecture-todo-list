@@ -2,17 +2,18 @@ import Header from './Header.tsx';
 import styled from 'styled-components';
 import TaskItem from './TaskItem.tsx';
 import { ViewModel } from '../../adapters/Presenter/ViewModel.ts';
+import { PresentableList } from '../../application/AddItemToList.ts';
 
 type Props = {
   viewModel: ViewModel;
 };
 
 const ListPage = ({ viewModel }: Props) => {
-  const list = viewModel?.list;
+  const list: PresentableList | undefined = viewModel?.list;
   return (
     <PageWrapper>
       <Header />
-      {list ? (
+      {list?.length ? (
         <List>
           <h2>To Do:</h2>
           {list.map((item) => (
