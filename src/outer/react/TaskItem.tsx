@@ -3,9 +3,9 @@ import { MdDelete } from 'react-icons/md';
 import { BiSolidSave } from 'react-icons/bi';
 import styled from 'styled-components';
 import { useContext, useState } from 'react'; // useEffect, useRef
-import { Item } from '../../domains/Item.ts';
 import { Context } from './Provider.ts';
 import { ContextType } from './Provider.ts';
+import { PresentableListItem } from '../../application/AddItemToList.ts';
 
 // const useOutsideClick = (callback) => {
 //     const ref = useRef();
@@ -26,7 +26,7 @@ import { ContextType } from './Provider.ts';
 // };
 
 type Props = {
-  item?: Item;
+  item?: PresentableListItem;
 };
 
 const TaskItem = ({ item }: Props) => {
