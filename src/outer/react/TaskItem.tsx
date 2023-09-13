@@ -28,6 +28,7 @@ import { ContextType } from './Provider.ts';
 type Props = {
   item?: Item;
 };
+
 const TaskItem = ({ item }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const context: ContextType | null = useContext(Context);
@@ -41,6 +42,17 @@ const TaskItem = ({ item }: Props) => {
     context?.controller?.executeRemoveItemFromList(id);
   };
 
+  const handleChangeStatus = (id: string | undefined): void => {
+    if (!id) return;
+    context?.controller?.executeChangeItemStatus(id);
+  };
+
+  const handleSave = (id: string | undefined) => {
+    if (!id) return;
+    setEdit(false);
+    // todo
+  };
+
   // const handleClickOutside = () => {
   //     setEdit(false);
   // };
@@ -50,13 +62,24 @@ const TaskItem = ({ item }: Props) => {
   return (
     <ItemWrapper>
       <IconWrapper>
-        <input type="checkbox" checked={item?.status} onChange={() => {}} />
+        <input
+          type="checkbox"
+          id={item?.id}
+          checked={item?.status}
+          onChange={() => handleChangeStatus(item?.id)}
+        />
         {edit ? (
           <>
             <EditInput defaultValue={item?.title} />
           </>
         ) : (
-          <span onDoubleClick={handleDoubleClick}>{item?.title}</span>
+          <Task
+            htmlFor={item?.id}
+            onDoubleClick={handleDoubleClick}
+            className={item?.status ? 'done' : 'undone'}
+          >
+            {item?.title}
+          </Task>
         )}
       </IconWrapper>
       <IconWrapper>
@@ -70,6 +93,11 @@ const TaskItem = ({ item }: Props) => {
     </ItemWrapper>
   );
 };
+
+const Task = styled.label`
+  text-decoration: ${(props): string =>
+    props.className === 'done' ? 'line-through' : 'none'};
+`;
 
 const EditInput = styled.input`
   width: 100%;
