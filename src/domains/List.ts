@@ -11,7 +11,7 @@ export class List {
     this._list.push(item);
   }
 
-  private findItemById(id: string) {
+  findItemById(id: string) {
     return this._list.find((item) => item.id === id);
   }
 
