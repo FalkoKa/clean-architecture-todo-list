@@ -13,6 +13,7 @@ import {
   ViewModel,
 } from './adapters/Presenter/ViewModel.ts';
 import { RemoveItemFromList } from './application/RemoveItemFromList.ts';
+import { ChangeItemStatus } from './application/ChangeItemStatus.ts';
 
 type State = {
   viewModel?: ViewModel;
@@ -35,7 +36,7 @@ export class Main extends React.PureComponent<Props, State> {
     this._useCases = {
       addItemToList: new AddItemToList(this._adapters),
       removeItemFromList: new RemoveItemFromList(this._adapters),
-      changeItemStatus: {},
+      changeItemStatus: new ChangeItemStatus(this._adapters),
       editItemTitle: {},
     };
 

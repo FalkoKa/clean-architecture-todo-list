@@ -1,4 +1,5 @@
 import { AddItemToList } from '../../application/AddItemToList.ts';
+import { ChangeItemStatus } from '../../application/ChangeItemStatus.ts';
 import { RemoveItemFromList } from '../../application/RemoveItemFromList.ts';
 import { Item } from '../../domains/Item.ts';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 export interface UseCases {
   addItemToList: AddItemToList;
   removeItemFromList: RemoveItemFromList;
-  changeItemStatus: any;
+  changeItemStatus: ChangeItemStatus;
   editItemTitle: any;
 }
 
@@ -20,5 +21,9 @@ export class Controller {
 
   executeRemoveItemFromList(id: string) {
     return this._useCases.removeItemFromList.execute(id);
+  }
+
+  executeChangeItemStatus(id: string) {
+    return this._useCases.changeItemStatus.execute(id);
   }
 }
