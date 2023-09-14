@@ -2,7 +2,7 @@ import { LuEdit } from 'react-icons/lu';
 import { MdDelete } from 'react-icons/md';
 import { BiSolidSave } from 'react-icons/bi';
 import styled from 'styled-components';
-import { useContext, useState } from 'react'; // useEffect, useRef
+import { ChangeEvent, useContext, useState } from 'react'; // useEffect, useRef
 import { Context } from './Provider.ts';
 import { ContextType } from './Provider.ts';
 import { PresentableListItem } from '../../application/AddItemToList.ts';
@@ -31,6 +31,7 @@ type Props = {
 
 const TaskItem = ({ item }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
+  const [title, setTitle] = useState(item?.title);
   const context: ContextType | null = useContext(Context);
 
   const handleDoubleClick = () => {
@@ -50,7 +51,9 @@ const TaskItem = ({ item }: Props) => {
   const handleSave = (id: string | undefined) => {
     if (!id) return;
     setEdit(false);
-    // todo
+    if (title) {
+      context?.controller?.executeEditItemTitle({ id, newTitle: title });
+    }
   };
 
   // const handleClickOutside = () => {
@@ -70,7 +73,13 @@ const TaskItem = ({ item }: Props) => {
         />
         {edit ? (
           <>
-            <EditInput defaultValue={item?.title} />
+            <EditInput
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setTitle(e.target.value)
+              }
+              defaultValue={item?.title}
+              value={title}
+            />
           </>
         ) : (
           <Task
@@ -84,7 +93,7 @@ const TaskItem = ({ item }: Props) => {
       </IconWrapper>
       <IconWrapper>
         {edit ? (
-          <BiSolidSave onClick={() => setEdit((prev) => !prev)} size={20} />
+          <BiSolidSave onClick={() => handleSave(item?.id)} size={20} />
         ) : (
           <LuEdit onClick={() => setEdit((prev) => !prev)} />
         )}
