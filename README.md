@@ -1,32 +1,22 @@
-# React + TypeScript + Vite
+This is a very simple react todo list app, built for the purpose of practicing the Clean Architecture design pattern from uncle bob.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> By separating the software into layers, and conforming to The Dependency Rule, you will create a system that is intrinsically testable, with all the benefits that implies. When any of the external parts of the system become obsolete, like the database, or the web framework, you can replace those obsolete elements with a minimum of fuss.
 
-Currently, two official plugins are available:
+This app is consistently built using through dependency inversion till its most outer layer, a fundamental principle of SOLID design pattern and thus, clean architecture.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Additionally, I used styled components for trying that library, as well as testing with the TS Jest library.
 
-## Expanding the ESLint configuration
+A small, fun project to learn this impressive architectural design pattern.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Still to do:
 
-- Configure the top-level `parserOptions` property like this:
+- [x] Basic app with clean architecture
+- [x] Basic styling
+- [ ] Local storage instead of memory
+- [ ] Drag + Drop
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-TODO-
-
-- functionality
-- try drag and drop library
+![](/assets/screenshot1.png)
+![](/assets/screenshot2.png)
+![](/assets/screenshot3.png)
+![](/assets/screenshot4.png)
+![](/assets/screenshot5.png)
