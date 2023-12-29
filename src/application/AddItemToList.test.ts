@@ -1,6 +1,9 @@
 import { AddItemToList, AddItemToListAdapter } from './AddItemToList.ts';
 import { ListStorageGateway } from '../adapters/ListStorage.ts';
-import { Presenter } from '../adapters/Presenter/ListPresenter.ts';
+import {
+  Presenter,
+  RendersListPage,
+} from '../adapters/Presenter/ListPresenter.ts';
 import { ViewModel } from '../adapters/Presenter/ViewModel.ts';
 import { Item } from '../domains/Item.ts';
 
@@ -16,9 +19,11 @@ describe('Add Item To List', () => {
 
     const useCase = new AddItemToList(adapters);
 
-    const itemToAdd = { title: 'go to school' };
+    const itemDTO = { title: 'go to school' };
 
-    useCase.execute(itemToAdd);
+    const item = new Item(jest.fn(), itemDTO.title);
+
+    useCase.execute({ item });
 
     const expectedRendersForItem: ViewModel = {
       global: {
