@@ -14,6 +14,7 @@ Still to do:
 
 - [x] Basic app with clean architecture
 - [x] Basic styling
+- [ ] More tests
 - [ ] Local storage instead of memory
 - [ ] Drag + Drop
 
